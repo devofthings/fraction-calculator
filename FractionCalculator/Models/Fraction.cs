@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author: Christopher Winter
+ * Datei: Fraction.cs
+ * Beschreibung: Diese Klasse erlaubt das Erstellen von Brüchen mit den dazugehörigen Methoden.
+ */
+
+using System;
 
 namespace FractionCalculator
 {
@@ -36,46 +42,54 @@ namespace FractionCalculator
         #endregion
 
         #region Worker
-        private int Euklid(int numerator, int denominator)
+        private int Euclid(int numerator, int denominator)
         {
             if (denominator == 0)
                 return numerator;
             else
-                return Euklid(denominator, numerator % denominator);
+                return Euclid(denominator, numerator % denominator);
         }
 
-        public void Add(Fraction fraction)
+        public Fraction Add(Fraction fraction)
         {
             Fraction solution = new Fraction();
             solution.Numerator = (Numerator * fraction.Denominator) + (fraction.Numerator * Denominator);
             solution.Denominator = (Denominator * fraction.Denominator);
-            int gcf = Euklid(solution.Numerator, solution.Denominator);
-            Console.WriteLine($"Solution: {solution.Numerator / gcf}/{solution.Denominator / gcf}");
+            int gcf = Euclid(solution.Numerator, solution.Denominator);
+            return new Fraction(solution.Numerator / gcf, solution.Denominator / gcf);
         }
-        public void Subtract(Fraction fraction)
+        public Fraction Subtract(Fraction fraction)
         {
             Fraction solution = new Fraction();
             solution.Numerator = (Numerator * fraction.Denominator) - (fraction.Numerator * Denominator);
             solution.Denominator = (Denominator * fraction.Denominator);
-            int gcf = Euklid(solution.Numerator, solution.Denominator);
-            Console.WriteLine($"Solution: {solution.Numerator / gcf}/{solution.Denominator / gcf}");
+            int gcf = Euclid(solution.Numerator, solution.Denominator);
+            return new Fraction(solution.Numerator / gcf, solution.Denominator / gcf);
         }
-        public void Multiply(Fraction fraction)
+        public Fraction Multiply(Fraction fraction)
         {
             Fraction solution = new Fraction();
             solution.Numerator = (Numerator * fraction.Numerator);
             solution.Denominator = (Denominator * fraction.Denominator);
-            int gcf = Euklid(solution.Numerator, solution.Denominator);
-            Console.WriteLine($"Solution: {solution.Numerator / gcf}/{solution.Denominator / gcf}");
+            int gcf = Euclid(solution.Numerator, solution.Denominator);
+            return new Fraction(solution.Numerator / gcf, solution.Denominator / gcf);
         }
-        public void Divide(Fraction fraction)
+        public Fraction Divide(Fraction fraction)
         {
             Fraction solution = new Fraction();
             solution.Numerator = (Numerator * fraction.Denominator);
             solution.Denominator = (Denominator * fraction.Numerator);
-            int gcf = Euklid(solution.Numerator, solution.Denominator);
-            Console.WriteLine($"Solution: {solution.Numerator / gcf}/{solution.Denominator / gcf}");
+            int gcf = Euclid(solution.Numerator, solution.Denominator);
+            return new Fraction(solution.Numerator / gcf, solution.Denominator / gcf);
         }
+        public Fraction Assign(Fraction fraction)
+        {
+            Numerator = fraction.Numerator;
+            Denominator = fraction.Denominator;
+            Console.WriteLine($"{Numerator} / {Denominator}");
+            return new Fraction(Numerator, Denominator);
+        }
+
         #endregion
     }
 }
